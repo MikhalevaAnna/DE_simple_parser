@@ -6,7 +6,6 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import time
-import random
 import re
 from urllib.parse import urljoin
 from typing import List, Dict, Optional, Tuple, Any
@@ -71,9 +70,11 @@ def make_request(url: str,
             if response.status_code == 200:
                 return response
             elif 500 <= response.status_code < 600:
-                logger.warning(f"Серверная ошибка {response.status_code} для {url}")
+                logger.warning(f"Серверная ошибка {response.status_code} "
+                               f"для {url}")
             else:
-                logger.warning(f"Клиентская ошибка {response.status_code} для {url}")
+                logger.warning(f"Клиентская ошибка {response.status_code} "
+                               f"для {url}")
                 return None  # Не повторяем для клиентских ошибок
 
         except requests.exceptions.ConnectionError as e:
@@ -81,7 +82,8 @@ def make_request(url: str,
 
             # Детализируем ошибку соединения
             if "Name or service not known" in str(e):
-                logger.error(f"DNS ошибка: не удалось разрешить имя хоста для {url}")
+                logger.error(f"DNS ошибка: не удалось разрешить имя хоста "
+                             f"для {url}")
             elif "timed out" in str(e).lower():
                 logger.error(f"Таймаут соединения для {url}")
             elif "refused" in str(e).lower():
@@ -102,7 +104,7 @@ def make_request(url: str,
 
         # Задержка перед повторной попыткой
         if attempt < config['max_retries']:
-            delay = config['min_delay'] * (2 ** attempt)  # Экспоненциальная задержка
+            delay = config['min_delay'] * (2 ** attempt)
             delay = min(delay, config['max_delay'] * 3)
             logger.info(f"Повторная попытка через {delay:.2f} секунд...")
             time.sleep(delay)
