@@ -62,7 +62,8 @@
  │   └── 📄 data_analyze.py           # Функции для анализа данных и генерации отчетов
  │   └── 📄 constants.py              # Константы и директории
  │   └── 📄 logger.py                 # Настройка логирования для всего приложения
- └── 📄 .env              # Файл с доступами для S3
+ └── 📄 .env.example                  # Пример файла для настройки доступов к S3
+ └── 📄 .gitignore                                         
  └── 📄 books_parser.py   # Основной скрипт. Парсер сайта books.toscrape.com с сохранением в **S3 Selectel** бакет.
  └── 📄 requirements.txt  # Файл с зависимостями
  ```
@@ -90,6 +91,7 @@
  1) git clone git@github.com:MikhalevaAnna/DE_simple_parser.git
  2) cd DE_simple_parser
  3) pip install -r requirements.txt
- 4) python books_parser.py
+ 4) cp .env.example .env           # Отредактируйте .env файл, добавьте свои ключи
+ 5) python books_parser.py
  ```
 
