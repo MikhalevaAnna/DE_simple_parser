@@ -34,10 +34,10 @@ MANIFEST
 *.swo
 
 # Логи и данные
-logs/
-files/
-*.log
-*.csv
+#logs/
+#files/
+#*.log
+#*.csv
 
 # OS
 .DS_Store
